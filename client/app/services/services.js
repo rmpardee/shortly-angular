@@ -2,6 +2,23 @@ angular.module('shortly.services', [])
 
 .factory('Links', function ($http) {
   // Your code here
+
+  // Creates a function that makes a GET request to /api/links
+  var httpGetLinks = function(){
+    return $http({
+      method: 'GET',
+      url: '/api/links'
+    })
+    // Once the request is done, we return the response data which is a collection of links
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  // Return the functions in this factory as an object
+  return {
+    httpGetLinks: httpGetLinks
+  }; 
 })
 .factory('Auth', function ($http, $location, $window) {
   // Don't touch this Auth service!!!
