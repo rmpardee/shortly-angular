@@ -34,7 +34,8 @@ module.exports = {
 
   newLink: function (req, res, next) {
     var url = req.body.url;
-    console.log(req.body);
+    console.log("3) newLink URL: ", url);
+
     if (!util.isValidUrl(url)) {
       return next(new Error('Not a valid url'));
     }
@@ -67,7 +68,7 @@ module.exports = {
         }
       })
       .fail(function (error) {
-        next(error);
+        next(error + 'inside newLink error');
       });
   },
 

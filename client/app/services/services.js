@@ -16,14 +16,17 @@ angular.module('shortly.services', [])
   };
 
   // Creates a function that makes a POST request to /api/links
-  var httpPostLinks = function(link){
+  var httpPostLinks = function( data ){
+    console.log("2) httpPostLinks data: ", data);
 
-    // TODO: something is broken with this POST
-
+    // Submits a POST request to /api/links route with our url object(data). This request goes to
+    // our linkRoutes.js file, which sends the request through the POST request, which
+    // goes to linkController.js file, and falls into the newLink fn, which sends the req
+    // to linkModel.js which interacts with our MongoDB server
     return $http({
       method: 'POST',
       url: '/api/links',
-      data: link
+      data: data
     })
     // Once the request is done, we return the response data which is the link we were posting
     .then(function(resp) {

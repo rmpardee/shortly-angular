@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.param('code', linksController.findUrl);
 
   // Added '/links' to this app.route, was originally just '/'
-  app.route('/links')
+  app.route('/')
     .get(linksController.allLinks)
     .post(linksController.newLink);
 
