@@ -15,9 +15,23 @@ angular.module('shortly.services', [])
     });
   };
 
+  // Creates a function that makes a POST request to /api/links
+  var httpPostLinks = function(link){
+    return $http({
+      method: 'POST',
+      url: '/api/links',
+      data: link
+    })
+    // Once the request is done, we return the response data which is the link we were posting
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
   // Return the functions in this factory as an object
   return {
-    httpGetLinks: httpGetLinks
+    httpGetLinks: httpGetLinks,
+    httpPostLinks: httpPostLinks
   }; 
 })
 .factory('Auth', function ($http, $location, $window) {
