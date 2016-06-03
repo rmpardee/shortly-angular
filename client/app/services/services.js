@@ -17,6 +17,9 @@ angular.module('shortly.services', [])
 
   // Creates a function that makes a POST request to /api/links
   var httpPostLinks = function(link){
+
+    // TODO: something is broken with this POST
+
     return $http({
       method: 'POST',
       url: '/api/links',

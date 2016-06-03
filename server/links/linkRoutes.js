@@ -9,7 +9,8 @@ module.exports = function (app) {
   // req.navLink before it reaches line 16.
   app.param('code', linksController.findUrl);
 
-  app.route('/')
+  // Added '/links' to this app.route, was originally just '/'
+  app.route('/links')
     .get(linksController.allLinks)
     .post(linksController.newLink);
 

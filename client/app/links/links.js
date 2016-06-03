@@ -5,7 +5,7 @@ angular.module('shortly.links', [])
     links: [ ]
   };
 
-  $scope.getLinks = function () {
+  $scope.getLinks = function (url) {
     // Need to use promise, the below won't work because of asyncronosity
     // $scope.data.link = Links.httpGetLinks();
 
