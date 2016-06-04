@@ -55,7 +55,16 @@ angular.module('shortly', [
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+  
+    // next.$$route.authenticate = Is this page gated, do you auth to visit
+
+    // The below line was the original if statment, but the middle condition was undefined
+    // removing it made the if statement work. We removed for now, but need to fix to make /signup work
+    // if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+
+    // Our modified if statement: Redirect when the next route exists and the user is not authorized
+    if (next.$$route && !Auth.isAuth()) {
+      // Redirects any failed authentication to /signin
       $location.path('/signin');
     }
   });
