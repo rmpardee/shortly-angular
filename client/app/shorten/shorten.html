@@ -1,8 +1,16 @@
-<div id='container' ng-controller='ShortenController'>
-  <!-- Input form for url -->
-  <input type='text' ng-model='link.url' placeholder='Type URL here' />
-  <!-- Submit button invokes addLink in shorten.js with our entire $scope.link obj -->
-  <button ng-click='addLink( link )'>Add Link</button>
+<div class="navigation">
+  <ul>
+    <li><a href="#/links">Links</a></li>
+    <li><a href="#/shorten">Shorten</a></li>
+  </ul>
+</div>
+<div id='container' ng-controller='ShortenController' class='creator'>
+  <form>
+    <!-- Input form for url -->
+    <input type='text' ng-model='link.url' placeholder='Type URL here' />
+    <!-- Submit button invokes addLink in shorten.js with our entire $scope.link obj -->
+    <button ng-click='addLink( link )'>Add Link</button>
+  </form>
 </div>
 
 

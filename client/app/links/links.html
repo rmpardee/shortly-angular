@@ -1,5 +1,23 @@
+<div class="navigation">
+  <ul>
+    <li><a href="#/links">Links</a></li>
+    <li><a href="#/shorten">Shorten</a></li>
+  </ul>
+</div>
 <div id='container' ng-controller='LinksController'>
   <!-- Your html here -->
-  <h1>hello</h1>
-  <!-- icon -->
+  <div ng-repeat='link in data.links' class='link'>
+    <img src='../assets/redirect_icon.png'>
+    <div class='info'>
+      <div class='visits'>
+        <span class='count'>{{ link.visits }}</span>
+        Visits
+      </div>
+      <div class='title'>{{ link.title }}</div>
+      <div class='original'>{{ link.url }}</div>
+      <!-- This will have to change to base_url + code -->
+      <a href='{{ link.url }}' target='_blank'>{{ link.url }}</a>
+    </div>
+  </div>
+  
 </div>
