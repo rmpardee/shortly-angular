@@ -15,9 +15,10 @@
       </div>
       <div class='title'>{{ link.title }}</div>
       <div class='original'>{{ link.url }}</div>
-      <!-- This will have to change to base_url + code -->
-      <a href='{{ link.url }}' target='_blank'>{{ link.url }}</a>
+      <a href='{{ link.base_url }}/api/links/{{ link.code }}' target="_blank">
+        {{ link.base_url }}/api/links/{{ link.code }}
+      </a>
     </div>
   </div>
-  
+
 </div>
