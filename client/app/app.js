@@ -7,7 +7,12 @@ angular.module('shortly', [
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider
-    // wee added an 'authenticate' property to each route URL below. It's used in line 70 below to see if a route is supposed to be gated or not
+    // .when('/', {
+    //   templateUrl: 'app/links/links.html',
+    //   controller: 'LinksController',
+    //   authenticate: true
+    // })
+    // we added an 'authenticate' property to each route URL below. It's used in line 70 below to see if a route is supposed to be gated or not
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController',
@@ -29,6 +34,10 @@ angular.module('shortly', [
       controller: 'ShortenController',
       authenticate: true
     })
+    // we added the below so that if you don't specify, it will send you to links (which will send you to signin if you're not authenticated)
+    .otherwise({
+      redirectTo: "/links"
+    });
 
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
