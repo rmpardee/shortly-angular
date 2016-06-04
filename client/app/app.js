@@ -7,22 +7,27 @@ angular.module('shortly', [
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider
+    // wee added an 'authenticate' property to each route URL below. It's used in line 70 below to see if a route is supposed to be gated or not
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: false
     })
     .when('/signup', {
       templateUrl: 'app/auth/signup.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: false
     })
     // we added /links and /shorten below, following the exact pattern as above and using the spec file as reference
     .when('/links', {
       templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      controller: 'LinksController',
+      authenticate: true
     })
     .when('/shorten', {
       templateUrl: 'app/shorten/shorten.html',
-      controller: 'ShortenController'
+      controller: 'ShortenController',
+      authenticate: true
     })
 
     // We add our $httpInterceptor into the array
@@ -55,15 +60,13 @@ angular.module('shortly', [
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-  
-    // next.$$route.authenticate = Is this page gated, do you auth to visit
 
-    // The below line was the original if statment, but the middle condition was undefined
-    // removing it made the if statement work. We removed for now, but need to fix to make /signup work
-    // if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+    // when all three of these conditions are TRUE, the if statement runs and the user is redirected:
+    // 1. next.$$route = Does the route you're trying to go to next exist?
+    // 2. next.$$route.authenticate = Is the route you're trying to go to next gated?
+    // 3. !Auth.isAuth() = are you NOT authorized currently (are you NOT logged in?)
+    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
 
-    // Our modified if statement: Redirect when the next route exists and the user is not authorized
-    if (next.$$route && !Auth.isAuth()) {
       // Redirects any failed authentication to /signin
       $location.path('/signin');
     }
